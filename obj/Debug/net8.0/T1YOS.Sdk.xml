@@ -1,0 +1,1162 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>T1YOS.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:T1YOS.Sdk.Client.T1Collection">
+             <summary>
+             Represents a database collection in the t1yOS cloud database.
+             Provides CRUD operations, advanced queries, and schema management.
+            
+             All methods delegate to <see cref="M:T1YOS.Sdk.Client.T1YOS.RequestAsync``1(T1YOS.Sdk.Types.HttpMethod,System.String,System.Object,System.Nullable{System.Boolean})"/> with the
+             appropriate HTTP method and REST path.
+             </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.#ctor(T1YOS.Sdk.Client.T1YOS,System.String)">
+            <summary>
+            Creates a new T1Collection instance.
+            </summary>
+            <param name="client">The parent T1YOS client.</param>
+            <param name="name">The collection name.</param>
+        </member>
+        <member name="P:T1YOS.Sdk.Client.T1Collection.Name">
+            <summary>Gets the collection name.</summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.InsertOneAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Inserts a single document into the collection.
+            </summary>
+            <param name="data">The document data as a dictionary. Must be non-empty.</param>
+            <returns>API response with the new document's ObjectID.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.FindByIdAsync(System.String)">
+            <summary>
+            Finds a document by its ObjectID.
+            </summary>
+            <param name="objectId">The 24-character hexadecimal ObjectID.</param>
+            <returns>API response with the found document.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.UpdateByIdAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Updates a document by its ObjectID.
+            </summary>
+            <param name="objectId">The 24-character hexadecimal ObjectID.</param>
+            <param name="data">The update data. Must be non-empty.</param>
+            <returns>API response with the modification count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.DeleteByIdAsync(System.String)">
+            <summary>
+            Deletes a document by its ObjectID.
+            </summary>
+            <param name="objectId">The 24-character hexadecimal ObjectID.</param>
+            <returns>API response with the deletion count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.FindOneAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Finds a single document matching the filter criteria.
+            </summary>
+            <param name="filter">Query filter as a non-empty dictionary.</param>
+            <returns>API response with the found document.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.UpdateOneAsync(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Updates a single document matching the filter criteria.
+            </summary>
+            <param name="filter">Query filter to match documents. Must be non-empty.</param>
+            <param name="body">Update operations (e.g., <c>$set</c>, <c>$inc</c>). Must be non-empty.</param>
+            <returns>API response with the modification count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.DeleteOneAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Deletes a single document matching the filter criteria.
+            </summary>
+            <param name="filter">Query filter to match documents. Must be non-empty.</param>
+            <returns>API response with the deletion count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.InsertManyAsync(System.Collections.Generic.Dictionary{System.String,System.Object}[])">
+            <summary>
+            Inserts multiple documents into the collection.
+            </summary>
+            <param name="dataList">Array of document data dictionaries. Must be non-empty.</param>
+            <returns>API response with inserted ObjectIDs and count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.UpdateManyAsync(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Updates multiple documents matching the filter criteria.
+            </summary>
+            <param name="filter">Query filter to match documents. Must be non-empty.</param>
+            <param name="body">Update operations. Must be non-empty.</param>
+            <returns>API response with the modification count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.DeleteManyAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Deletes multiple documents matching the filter criteria.
+            </summary>
+            <param name="filter">Query filter to match documents. Must be non-empty.</param>
+            <returns>API response with the deletion count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.FindAsync(System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Performs a paginated query on the collection.
+            </summary>
+            <param name="page">Page number (1-based). Default: 1. Throws if less than 1.</param>
+            <param name="size">Number of items per page. Throws if less than 1 or greater than 100.</param>
+            <param name="sort">Optional sort specification (e.g., <c>{ "createdAt": -1 }</c>).</param>
+            <param name="filter">Optional query filter.</param>
+            <returns>API response with paginated results.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if page or size are out of range.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.AggregateAsync(System.Collections.Generic.Dictionary{System.String,System.Object}[])">
+            <summary>
+            Executes an aggregation pipeline on the collection.
+            </summary>
+            <param name="pipeline">
+            Array of aggregation pipeline stages. Must be non-empty.
+            Each stage is a dictionary representing a MongoDB aggregation operation.
+            </param>
+            <returns>API response with aggregated results.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.CountAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Counts documents matching the optional filter.
+            </summary>
+            <param name="filter">Optional query filter.</param>
+            <returns>API response with the document count.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.DistinctAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Gets distinct values for a specified field.
+            </summary>
+            <param name="fieldName">The field name to get distinct values for.</param>
+            <param name="filter">Optional query filter.</param>
+            <returns>API response with distinct values.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.CreateAsync">
+            <summary>
+            Creates a new collection (schema) in the database.
+            </summary>
+            <returns>API response.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.ClearAsync">
+            <summary>
+            Clears all documents from the collection while keeping the schema.
+            </summary>
+            <returns>API response with <c>deletedCount</c> in the data.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1Collection.DropAsync">
+            <summary>
+            Drops the collection (schema and all documents) from the database.
+            </summary>
+            <returns>API response.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.Client.T1YOS">
+             <summary>
+             Main client for the t1yOS Serverless Platform.
+             Provides access to cloud database, metadata, cloud functions,
+             and cryptographic utilities.
+            
+             <example>
+             Usage:
+             <code>
+             var client = new T1YOS(new T1YOSConfig
+             {
+                 AppId = 1001,
+                 ApiKey = "your-32-character-api-key-here",
+                 SecretKey = "your-32-character-secret-key-here"
+             });
+            
+             await client.InitAsync();
+            
+             // Database operations
+             var users = client.Db.Collection("users");
+             var result = await users.InsertOneAsync(new Dictionary&lt;string, object?&gt;
+             {
+                 { "name", "Alice" },
+                 { "age", 30 }
+             });
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Client.T1YOS.Db">
+            <summary>
+            Database accessor for collection operations.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.#ctor(T1YOS.Sdk.Types.T1YOSConfig,System.Net.Http.HttpClient)">
+            <summary>
+            Creates a new T1YOS client instance.
+            </summary>
+            <param name="config">
+            Configuration for the client. The following fields are required:
+            <c>AppId</c> (>= 1001), <c>ApiKey</c> (32 chars), <c>SecretKey</c> (32 chars).
+            All other fields have sensible defaults.
+            </param>
+            <param name="httpClient">
+            Optional <see cref="T:System.Net.Http.HttpClient"/> for dependency injection and testing.
+            If not provided, an internal HttpClient is created and managed.
+            </param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">
+            Thrown if required configuration fields are invalid.
+            </exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.InitAsync">
+             <summary>
+             Initializes the client by syncing with the server.
+             Retrieves the server's Unix timestamp and safe mode setting
+             to correct clock skew and configure encryption.
+            
+             If the server is unreachable, the client gracefully degrades
+             with defaults (offset = 0, isSafeMode = false) and logs a warning.
+             </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.RequestAsync``1(T1YOS.Sdk.Types.HttpMethod,System.String,System.Object,System.Nullable{System.Boolean})">
+            <summary>
+            Executes a generic API request and returns the typed response.
+            This is the core internal method used by all public API methods.
+            </summary>
+            <typeparam name="T">Expected type of the response data.</typeparam>
+            <param name="method">HTTP method.</param>
+            <param name="path">API path (e.g., <c>/v5/classes/Users</c>).</param>
+            <param name="body">Request body object (for POST/PUT).</param>
+            <param name="encryption">Whether to encrypt the request. Null uses client default.</param>
+            <returns>The deserialized API response.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.GetMetaAsync(System.String)">
+            <summary>
+            Retrieves metadata from the server.
+            </summary>
+            <param name="field">
+            Optional field name to retrieve. If null or empty, returns all metadata.
+            </param>
+            <returns>The metadata API response.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.CheckUpdateAsync">
+            <summary>
+            Checks if a newer version of the SDK is available on the server.
+            Compares the server version with the client's configured version.
+            </summary>
+            <returns>True if an update is available, false otherwise.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.CallFuncAsync(System.String,System.Object,System.Nullable{System.Boolean})">
+             <summary>
+             Calls a cloud function (<c>.jsc</c> file) on the server.
+            
+             Function name transformations:
+             - <c>"hello"</c> becomes <c>"hello.jsc"</c>
+             - <c>"dir/"</c> becomes <c>"dir/index.jsc"</c>
+             - <c>"script.js"</c> becomes <c>"script.jsc"</c>
+             - <c>"func.jsc"</c> stays as-is
+             </summary>
+             <param name="name">Function name. The <c>.jsc</c> extension is auto-appended.</param>
+             <param name="parameters">Optional parameters to pass to the function.</param>
+             <param name="enableSafeMode">Whether to enable safe mode for this call.</param>
+             <returns>The cloud function's API response.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.EnsureJscExtension(System.String)">
+            <summary>
+            Ensures the function name has a <c>.jsc</c> extension.
+            Handles leading slashes, query strings, and hash fragments.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.AssertObjectID(System.String,System.String)">
+            <summary>
+            Validates that a string is a valid 24-character hexadecimal ObjectID.
+            Delegates to <see cref="M:T1YOS.Sdk.Utils.Validators.AssertObjectID(System.String,System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.IsNonEmptyObject(System.Object)">
+            <summary>
+            Checks if a value is a non-empty object (dictionary with at least one key).
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.IsPlainObject(System.Object)">
+            <summary>
+            Checks if a value is a plain object (non-null dictionary).
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.IsNonEmptyArrayWithNonEmptyObjects(System.Object)">
+            <summary>
+            Checks if a value is a non-empty array of non-empty objects.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.HmacSHA256(System.String,System.String)">
+            <summary>
+            Computes HMAC-SHA256 of a message using a secret key.
+            Returns the result as a 64-character lowercase hex string.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.VerifyHmacSHA256(System.String,System.String,System.String)">
+            <summary>
+            Verifies an HMAC-SHA256 signature against the expected value.
+            Uses constant-time comparison.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.Dispose">
+            <summary>
+            Disposes the client and releases resources.
+            Safe to call multiple times.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Client.T1YOS.DbAccessor">
+            <summary>
+            Provides access to database collections.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.DbAccessor.Collection(System.String)">
+            <summary>
+            Gets a <see cref="T:T1YOS.Sdk.Client.T1Collection"/> instance for the specified collection name.
+            </summary>
+            <param name="name">The collection name.</param>
+            <returns>A <see cref="T:T1YOS.Sdk.Client.T1Collection"/> for database operations on this collection.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.DbAccessor.GetCollectionsAsync">
+            <summary>
+            Gets all collections (schemas) from the database.
+            </summary>
+            <returns>API response with the list of collections.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Client.T1YOS.DbAccessor.ToObjectID(System.String)">
+            <summary>
+            Converts a hex string to an ObjectID marker.
+            </summary>
+            <param name="id">24-character hexadecimal ObjectID.</param>
+            <returns>An ObjectID marker string.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.Constants">
+            <summary>
+            Global constants for the T1YOS SDK.
+            </summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultBaseUrl">
+            <summary>Default base URL for the t1yOS platform.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.MinAppId">
+            <summary>Minimum valid application ID.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.ApiKeyLength">
+            <summary>Required length for API keys (32 characters).</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.SecretKeyLength">
+            <summary>Required length for secret keys (32 characters).</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultVersion">
+            <summary>Default API version.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultTimeFormat">
+            <summary>Default time format string for timestamp localization.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultOffset">
+            <summary>Default time offset in seconds.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultSafeMode">
+            <summary>Default safe mode setting.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.MaxTimeDiff">
+            <summary>Maximum allowed time difference for request signatures (seconds).</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.RequestTimeoutMs">
+            <summary>Default request timeout in milliseconds (5 minutes).</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.MaxPageSize">
+            <summary>Maximum page size for paginated queries.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.DefaultPageSize">
+            <summary>Default page size for paginated queries.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.ObjectIdLength">
+            <summary>Required length for ObjectID hex strings.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Constants.ApiVersion">
+            <summary>API version prefix for REST endpoints.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.AESGCMPayload">
+            <summary>
+            Represents an AES-256-GCM encrypted payload as exchanged with the t1yOS server.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.AESGCMPayload.N">
+            <summary>Base64-encoded nonce (12 bytes).</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.AESGCMPayload.J">
+            <summary>Base64-encoded ciphertext.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.AESGCMPayload.T">
+            <summary>Base64-encoded authentication tag (16 bytes).</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.AESHelper">
+            <summary>
+            AES-256-GCM encryption/decryption utilities for the T1YOS SDK.
+            Used for payload encryption when safe mode is enabled.
+            Uses BouncyCastle <see cref="T:Org.BouncyCastle.Crypto.Modes.GcmBlockCipher"/> with <see cref="T:Org.BouncyCastle.Crypto.Engines.AesEngine"/>
+            across all target frameworks for consistent behavior.
+            </summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Crypto.AESHelper.GcmMacSizeBits">
+            <summary>GCM authentication tag length in bits.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Crypto.AESHelper.NonceLengthBytes">
+            <summary>Nonce length in bytes.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Crypto.AESHelper.KeyLengthBytes">
+            <summary>Required AES key length in bytes (256 bits).</summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.AESHelper.EncryptAESGCM(System.String,System.Byte[])">
+            <summary>
+            Encrypts a string using AES-256-GCM.
+            </summary>
+            <param name="data">The plaintext string to encrypt.</param>
+            <param name="key">The 32-byte (256-bit) encryption key.</param>
+            <returns>A JSON string containing base64-encoded nonce, ciphertext, and tag.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the key is not exactly 32 bytes.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.AESHelper.DecryptAESGCM(System.String,System.Byte[])">
+            <summary>
+            Decrypts an AES-256-GCM encrypted JSON payload.
+            </summary>
+            <param name="jsonPayload">
+            The JSON string containing <c>n</c> (nonce), <c>j</c> (ciphertext),
+            and <c>t</c> (tag) fields, all base64-encoded.
+            </param>
+            <param name="key">The 32-byte (256-bit) decryption key.</param>
+            <returns>The decrypted plaintext string.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the key is not exactly 32 bytes.</exception>
+            <exception cref="T:System.FormatException">Thrown if the JSON payload is malformed.</exception>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.HMACHelper">
+            <summary>
+            HMAC-SHA256 utilities for the T1YOS SDK.
+            Used for request signing and signature verification.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.HMACHelper.HmacSHA256Hex(System.String,System.String)">
+            <summary>
+            Computes the HMAC-SHA256 of a message using a secret key,
+            returning the result as a lowercase hexadecimal string (64 characters).
+            </summary>
+            <param name="secret">The secret key.</param>
+            <param name="message">The message to authenticate.</param>
+            <returns>Lowercase hexadecimal HMAC-SHA256 hash string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.HMACHelper.VerifyHmacSHA256(System.String,System.String,System.String)">
+            <summary>
+            Verifies an HMAC-SHA256 signature against the expected value.
+            Uses constant-time comparison to prevent timing attacks.
+            </summary>
+            <param name="secret">The secret key.</param>
+            <param name="message">The original message.</param>
+            <param name="signature">The signature to verify (case-insensitive).</param>
+            <returns>True if the signature is valid.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.HMACHelper.BytesToHexStringLower(System.Byte[])">
+            <summary>
+            Converts a byte array to a lowercase hexadecimal string.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.HMACHelper.ConstantTimeEquals(System.String,System.String)">
+            <summary>
+            Performs a constant-time comparison of two strings.
+            Mitigates timing side-channel attacks.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.SHA256Helper">
+            <summary>
+            SHA-256 hashing utilities for the T1YOS SDK.
+            Provides hex-encoded SHA-256 digest computation.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.SHA256Helper.Sha256Hex(System.String)">
+            <summary>
+            Computes the SHA-256 hash of a string and returns it as a
+            lowercase hexadecimal string (64 characters).
+            </summary>
+            <param name="data">The input string to hash.</param>
+            <returns>Lowercase hexadecimal SHA-256 hash string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.SHA256Helper.BytesToHexStringLower(System.Byte[])">
+            <summary>
+            Converts a byte array to a lowercase hexadecimal string.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.SignatureInput">
+            <summary>
+            Input parameters for request signature generation.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.Method">
+            <summary>HTTP method (GET, POST, PUT, DELETE).</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.PathAndQuery">
+            <summary>URL path with query string.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.Body">
+            <summary>Request body string.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.AppId">
+            <summary>Application ID.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.Timestamp">
+            <summary>Unix timestamp for the request.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Crypto.SignatureInput.SecretKey">
+            <summary>Secret key for HMAC-SHA256 signing.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Crypto.SignHelper">
+             <summary>
+             Request signing utilities for the T1YOS SDK.
+             Generates HMAC-SHA256 signatures used to authenticate API requests.
+            
+             Signature algorithm:
+             <code>
+             message = METHOD + "\n" + PATH_AND_QUERY + "\n" + SHA256(body) + "\n" + appId + "\n" + timestamp
+             signature = HMAC-SHA256(secretKey, message)
+             </code>
+             </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.SignHelper.CreateSignature(T1YOS.Sdk.Crypto.SignatureInput)">
+            <summary>
+            Creates an HMAC-SHA256 request signature.
+            </summary>
+            <param name="input">The signature input parameters.</param>
+            <returns>A 64-character lowercase hexadecimal signature string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.SignHelper.GetSafeTimestamp(System.Int32)">
+            <summary>
+            Gets a safe Unix timestamp adjusted by the server time offset.
+            The offset is computed during <c>InitAsync()</c> to correct for
+            clock skew between client and server.
+            </summary>
+            <param name="offset">Time offset in seconds (server time - client time).</param>
+            <returns>Adjusted Unix timestamp as a string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Crypto.SignHelper.GetUnixTimestampSeconds">
+            <summary>
+            Gets the current Unix timestamp in seconds.
+            Uses <c>DateTimeOffset.ToUnixTimeSeconds</c> on .NET 5+,
+            falls back to manual calculation on older frameworks.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Http.RequestOptions">
+            <summary>
+            Options for executing an HTTP request through the T1YOS API.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Http.RequestOptions.Method">
+            <summary>HTTP method.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Http.RequestOptions.Path">
+            <summary>API path (e.g., <c>/v5/classes/Users</c>).</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Http.RequestOptions.Params">
+            <summary>Request body or query parameters.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Http.RequestOptions.Encryption">
+            <summary>Whether to force encryption. Null means use client default.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Http.RequestOptions.Timeout">
+            <summary>Request timeout in milliseconds. Null means use default (5 min).</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Http.RequestExecutor">
+            <summary>
+            HTTP request execution engine for the T1YOS SDK.
+            Handles URL construction, body serialization, encryption, signing,
+            and header injection for all API requests.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Http.RequestExecutor.ExecuteRequestAsync``1(T1YOS.Sdk.Types.T1YOSInternalConfig,System.Net.Http.HttpClient,T1YOS.Sdk.Http.RequestOptions)">
+            <summary>
+            Executes an HTTP request and returns the typed API response.
+            This is the core method that all client operations delegate to.
+            </summary>
+            <typeparam name="T">Expected type of the response data.</typeparam>
+            <param name="clientConfig">The client configuration.</param>
+            <param name="httpClient">The HTTP client to use.</param>
+            <param name="options">Request options.</param>
+            <returns>The deserialized API response.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.Http.ResponseHandler">
+            <summary>
+            Response handling utilities for the T1YOS SDK.
+            Handles JSON parsing, safe-mode decryption, timestamp formatting,
+            and error extraction from HTTP responses.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Http.ResponseHandler.HandleResponseAsync``1(System.Net.Http.HttpResponseMessage,T1YOS.Sdk.Types.T1YOSInternalConfig)">
+            <summary>
+            Processes an HTTP response and returns a typed API response.
+            Handles safe-mode decryption, timestamp formatting, and error extraction.
+            </summary>
+            <typeparam name="T">Expected type of the response data.</typeparam>
+            <param name="response">The HTTP response message.</param>
+            <param name="clientConfig">Client configuration (for decryption keys and time format).</param>
+            <returns>The deserialized API response.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Http.ResponseHandler.ExtractError(System.String,System.Int32)">
+            <summary>
+            Extracts a <see cref="T:T1YOS.Sdk.Utils.T1YError"/> from a server error response.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Http.ResponseHandler.JsonElementToObject(System.Text.Json.JsonElement)">
+            <summary>
+            Converts a <see cref="T:System.Text.Json.JsonElement"/> to a CLR object
+            (dictionary, array, or primitive).
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Http.ResponseHandler.HandleHttpError(System.Exception)">
+            <summary>
+            Handles HTTP client exceptions and wraps them in <see cref="T:T1YOS.Sdk.Utils.T1YError"/>.
+            </summary>
+            <param name="ex">The exception to handle.</param>
+            <returns>A <see cref="T:T1YOS.Sdk.Utils.T1YError"/> wrapping the original exception.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.SpecialTypes.SpecialTypes">
+             <summary>
+             Special type marker functions and constants for the t1yOS SDK.
+            
+             The t1yOS server recognizes special marker strings in JSON request bodies
+             and converts them to native database types (ObjectID, Date, typed numbers, etc.).
+            
+             Examples:
+             <code>
+             SpecialTypes.ObjectID("507f1f77bcf86cd799439011")  → ObjectID('507f1f77bcf86cd799439011')
+             SpecialTypes.Date_("2024-01-15T10:30:00Z")         → Date('2024-01-15T10:30:00Z')
+             SpecialTypes.Integer(42)                            → Integer(42)
+             </code>
+             </summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.ObjectIdPattern">
+            <summary>ObjectID hex character pattern.</summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.ObjectID(System.String)">
+            <summary>
+            Creates an ObjectID marker string for the given hex ID.
+            The ID must be a 24-character hexadecimal string.
+            </summary>
+            <param name="id">24-character hexadecimal ObjectID.</param>
+            <returns>An <c>ObjectID('...')</c> marker string.</returns>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if the ID is not a valid 24-char hex string.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Date_(System.String)">
+            <summary>
+            Creates a Date marker string.
+            </summary>
+            <param name="dateStr">An ISO-8601 date string or other date representation.</param>
+            <returns>A <c>Date('...')</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.DateTime_(System.String)">
+            <summary>
+            Creates a DateTime marker string.
+            </summary>
+            <param name="dateStr">An ISO-8601 datetime string.</param>
+            <returns>A <c>DateTime('...')</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Timestamp(System.String)">
+            <summary>
+            Creates a Timestamp marker string (Unix timestamp in seconds).
+            </summary>
+            <param name="unix">Unix timestamp as a string.</param>
+            <returns>A <c>Timestamp('...')</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Boolean_(System.Boolean)">
+            <summary>
+            Creates a Boolean marker string.
+            </summary>
+            <param name="val">The boolean value.</param>
+            <returns>A <c>Boolean(true)</c> or <c>Boolean(false)</c> marker string (lowercase).</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Integer(System.Int64)">
+            <summary>
+            Creates an Integer marker string.
+            </summary>
+            <param name="n">The integer value.</param>
+            <returns>An <c>Integer(...)</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Bigint(System.Int64)">
+            <summary>
+            Creates a Bigint marker string.
+            </summary>
+            <param name="n">The big integer value.</param>
+            <returns>A <c>Bigint(...)</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Float(System.Double)">
+            <summary>
+            Creates a Float marker string.
+            </summary>
+            <param name="n">The float value.</param>
+            <returns>A <c>Float(...)</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Double_(System.Double)">
+            <summary>
+            Creates a Double marker string.
+            </summary>
+            <param name="n">The double value.</param>
+            <returns>A <c>Double(...)</c> marker string.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Array_(System.Object[])">
+            <summary>
+            Creates an Array marker string. The array elements are serialized as JSON.
+            </summary>
+            <param name="arr">The array of objects.</param>
+            <returns>An <c>Array(...)</c> marker string with JSON body.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.Map_(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Creates a Map marker string. The dictionary is serialized as JSON.
+            </summary>
+            <param name="obj">The dictionary to mark as a Map.</param>
+            <returns>A <c>Map(...)</c> marker string with JSON body.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.MapArray(System.Collections.Generic.Dictionary{System.String,System.Object}[])">
+            <summary>
+            Creates a MapArray marker string. The array of dictionaries is serialized as JSON.
+            </summary>
+            <param name="arr">Array of dictionaries to mark as Map[].</param>
+            <returns>A <c>Map[](...)</c> marker string with JSON body.</returns>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.Null">
+            <summary>Null marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.None">
+            <summary>None marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.Nil">
+            <summary>Nil marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.Empty">
+            <summary>Empty string marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.UNDEFINED">
+            <summary>UNDEFINED marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.Undefined">
+            <summary>Undefined marker constant.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNow">
+            <summary>Server-side <c>time.Now()</c> marker.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowUnix">
+            <summary>Server-side <c>time.Now().Unix()</c> marker.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowUnixNano">
+            <summary>Server-side <c>time.Now().UnixNano()</c> marker.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowWeekday">
+            <summary>Server-side <c>time.Now().Weekday()</c> marker.</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowWeekdayChinese">
+            <summary>Server-side <c>time.Now().Weekday().Chinese()</c> marker.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper">
+            <summary>
+            Convenience class for server-side time markers.
+            Provides a fluent-style API: <c>TimeNowHelper.Now()</c>, etc.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper.Now">
+            <summary><c>time.Now()</c></summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper.Unix">
+            <summary><c>time.Now().Unix()</c></summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper.UnixNano">
+            <summary><c>time.Now().UnixNano()</c></summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper.Weekday">
+            <summary><c>time.Now().Weekday()</c></summary>
+        </member>
+        <member name="M:T1YOS.Sdk.SpecialTypes.SpecialTypes.TimeNowHelper.WeekdayChinese">
+            <summary><c>time.Now().Weekday().Chinese()</c></summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.ApiResponse`1">
+            <summary>
+            Standard API response envelope returned by the t1yOS server.
+            </summary>
+            <typeparam name="T">Type of the response data payload.</typeparam>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.ApiResponse`1.Code">
+            <summary>HTTP status code or error code.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.ApiResponse`1.Message">
+            <summary>Response message from the server.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.ApiResponse`1.Data">
+            <summary>Response data payload.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.InsertResult">
+            <summary>
+            Result returned after inserting a single document.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.InsertResult.ObjectId">
+            <summary>The ObjectID of the newly inserted document.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.InsertManyResult">
+            <summary>
+            Result returned after inserting multiple documents.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.InsertManyResult.ObjectIds">
+            <summary>Array of ObjectIDs for the inserted documents.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.InsertManyResult.InsertedCount">
+            <summary>Number of documents inserted.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.DeleteResult">
+            <summary>
+            Result returned after deleting a single document by ID.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.DeleteResult.DeletedCount">
+            <summary>Number of documents deleted (0 or 1).</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.DeleteManyResult">
+            <summary>
+            Result returned after deleting multiple documents.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.DeleteManyResult.DeletedCount">
+            <summary>Number of documents deleted.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.UpdateResult">
+            <summary>
+            Result returned after updating a single document.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.UpdateResult.ModifiedCount">
+            <summary>Number of documents modified (0 or 1).</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.UpdateManyResult">
+            <summary>
+            Result returned after updating multiple documents.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.UpdateManyResult.ModifiedCount">
+            <summary>Number of documents modified.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.FindResult">
+            <summary>
+            Result returned when finding a single document.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.FindResult.Result">
+            <summary>The found document as a dictionary, or null if not found.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.Pagination">
+            <summary>
+            Pagination metadata.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.Pagination.TotalItems">
+            <summary>Total number of items across all pages.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.Pagination.TotalPages">
+            <summary>Total number of pages.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.PaginationResult">
+            <summary>
+            Paginated query result.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.PaginationResult.Results">
+            <summary>Array of result documents.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.PaginationResult.Page">
+            <summary>Current page number.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.PaginationResult.Size">
+            <summary>Number of items per page.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.PaginationResult.Pagination">
+            <summary>Pagination metadata.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.AggregateResult">
+            <summary>
+            Aggregation pipeline result.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.AggregateResult.Results">
+            <summary>Array of aggregated result documents.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.InitResult">
+            <summary>
+            Result returned from the initialization endpoint.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.InitResult.Unix">
+            <summary>Server's current Unix timestamp in seconds.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.InitResult.IsSafeMode">
+            <summary>Whether the server has safe mode enabled.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.T1YOSConfig">
+            <summary>
+            Configuration options for initializing a T1YOS client.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.BaseUrl">
+            <summary>
+            Base URL of the t1yOS server. Defaults to <c>https://myapp.t1y.net</c>.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.AppId">
+            <summary>
+            Application ID (must be >= 1001).
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.ApiKey">
+            <summary>
+            API key (must be exactly 32 characters).
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.SecretKey">
+            <summary>
+            Secret key for request signing (must be exactly 32 characters).
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.Version">
+            <summary>
+            API version. Defaults to 0.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.IsSafeMode">
+            <summary>
+            Whether to enable safe mode (AES-256-GCM payload encryption). Defaults to <c>false</c>.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.TimeFormat">
+            <summary>
+            Time format for timestamp localization. Defaults to <c>"YYYY-MM-DD HH:mm:ss"</c>.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSConfig.Offset">
+            <summary>
+            Time offset in seconds for request signing. Defaults to 0.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.T1YOSInternalConfig">
+            <summary>
+            Internal configuration with all defaults resolved.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.BaseUrl">
+            <summary>Resolved base URL (no trailing slash).</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.AppId">
+            <summary>Validated application ID.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.ApiKey">
+            <summary>Validated API key.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.SecretKey">
+            <summary>Validated secret key.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.Version">
+            <summary>Resolved API version.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.IsSafeMode">
+            <summary>Resolved safe mode flag.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.TimeFormat">
+            <summary>Resolved time format string.</summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Types.T1YOSInternalConfig.Offset">
+            <summary>Resolved time offset in seconds.</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Types.HttpMethod">
+            <summary>
+            Supported HTTP methods for API requests.
+            </summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Types.HttpMethod.GET">
+            <summary>HTTP GET</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Types.HttpMethod.POST">
+            <summary>HTTP POST</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Types.HttpMethod.PUT">
+            <summary>HTTP PUT</summary>
+        </member>
+        <member name="F:T1YOS.Sdk.Types.HttpMethod.DELETE">
+            <summary>HTTP DELETE</summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.ConvertHelper">
+            <summary>
+            Type conversion utilities for the T1YOS SDK.
+            Handles conversion of C# DateTime objects and numeric timestamps
+            into the special marker strings that the t1yOS server understands.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.ConvertHelper.ConvertDateTypes(System.Object)">
+             <summary>
+             Recursively converts DateTime objects and timestamp numbers
+             into special marker strings recognized by the t1yOS server.
+            
+             Rules:
+             - <see cref="T:System.DateTime"/> objects become <c>Date('ISO-8601')</c> marker strings.
+             - <see cref="T:System.Int64"/> values with 10+ digits become <c>Timestamp('unix')</c> markers.
+             - <see cref="T:System.Collections.Generic.Dictionary`2"/> objects are traversed recursively.
+             - Arrays and lists are traversed recursively.
+             - All other values are returned unchanged.
+             </summary>
+             <param name="value">The value to convert.</param>
+             <returns>The converted value with Date/Timestamp markers applied.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.ConvertHelper.IsNonEmptyObject(System.Object)">
+            <summary>
+            Checks if a value is a non-null, non-array dictionary with at least one key.
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>True if the value is a non-empty object (dictionary).</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.ConvertHelper.IsPlainObject(System.Object)">
+            <summary>
+            Checks if a value is a non-null dictionary (may be empty).
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>True if the value is a plain object (dictionary).</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.ConvertHelper.IsNonEmptyArrayWithNonEmptyObjects(System.Object)">
+            <summary>
+            Checks if a value is a non-empty array where every element is a non-empty dictionary.
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>True if the value is a non-empty array of non-empty objects.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.T1YError">
+            <summary>
+            Represents an error returned by the t1yOS API.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Utils.T1YError.Code">
+            <summary>
+            HTTP status code or error code from the server.
+            </summary>
+        </member>
+        <member name="P:T1YOS.Sdk.Utils.T1YError.ErrorData">
+            <summary>
+            Optional response data payload associated with the error.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.T1YError.#ctor(System.Int32,System.String,System.Object)">
+            <summary>
+            Creates a new T1YError instance.
+            </summary>
+            <param name="code">Error code (HTTP status or custom).</param>
+            <param name="message">Error message.</param>
+            <param name="data">Optional error data.</param>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.T1YError.ToString">
+            <summary>
+            Returns a JSON-like string representation of the error.
+            </summary>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.ValidationError">
+            <summary>
+            Represents a configuration validation error.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.ValidationError.#ctor(System.String)">
+            <summary>
+            Creates a new ValidationError instance.
+            </summary>
+            <param name="message">Validation error message.</param>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.TimeHelper">
+            <summary>
+            Time formatting utilities for the T1YOS SDK.
+            Handles conversion of server UTC timestamps to local time format.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.TimeHelper.FormatTimestampsToLocal(System.Object,System.String)">
+             <summary>
+             Recursively formats <c>createdAt</c> and <c>updatedAt</c> fields
+             from UTC strings to local time using the specified format.
+            
+             Format tokens:
+             <c>YYYY</c> = year, <c>MM</c> = month, <c>DD</c> = day,
+             <c>HH</c> = hour, <c>mm</c> = minute, <c>ss</c> = second.
+             </summary>
+             <param name="data">The data structure to format.</param>
+             <param name="format">Custom time format string. Defaults to <c>"YYYY-MM-DD HH:mm:ss"</c>.</param>
+             <returns>The data structure with timestamps formatted to local time.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.TimeHelper.FormatDateString(System.String,System.String)">
+            <summary>
+            Formats a UTC date string to local time using the specified format pattern.
+            </summary>
+            <param name="utcDateString">UTC date string to parse and format.</param>
+            <param name="format">Custom format with YYYY, MM, DD, HH, mm, ss tokens.</param>
+            <returns>Local time formatted string, or the original string if parsing fails.</returns>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.UrlHelper">
+            <summary>
+            URL utility functions for the T1YOS SDK.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.UrlHelper.NormalizeBaseUrl(System.String)">
+            <summary>
+            Normalizes a base URL by removing trailing slashes.
+            </summary>
+            <param name="baseUrl">The base URL to normalize.</param>
+            <returns>Normalized base URL without trailing slashes.</returns>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.UrlHelper.AppendQueryParams(System.UriBuilder,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Appends query parameters to a URI builder.
+            Null values are skipped; non-string values are serialized as JSON.
+            </summary>
+            <param name="uriBuilder">The URI builder to modify.</param>
+            <param name="queryParams">Dictionary of query parameters.</param>
+        </member>
+        <member name="T:T1YOS.Sdk.Utils.Validators">
+            <summary>
+            Validation utilities for the T1YOS SDK configuration and data.
+            </summary>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.ValidateAppId(System.Int32)">
+            <summary>
+            Validates that the application ID is >= 1001.
+            </summary>
+            <param name="appId">Application ID to validate.</param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if appId is less than 1001.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.ValidateApiKey(System.String)">
+            <summary>
+            Validates that the API key is exactly 32 characters.
+            </summary>
+            <param name="apiKey">API key string to validate.</param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if apiKey is not 32 characters.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.ValidateSecretKey(System.String)">
+            <summary>
+            Validates that the secret key is exactly 32 characters.
+            </summary>
+            <param name="secretKey">Secret key string to validate.</param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if secretKey is not 32 characters.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.ValidateBaseUrl(System.String)">
+            <summary>
+            Validates that the base URL starts with http:// or https://.
+            </summary>
+            <param name="baseUrl">Base URL string to validate.</param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if baseUrl is missing required protocol.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.ValidateInitConfig(T1YOS.Sdk.Types.T1YOSConfig)">
+            <summary>
+            Validates all required fields in a T1YOSConfig object.
+            </summary>
+            <param name="config">Configuration to validate.</param>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if any required field is invalid.</exception>
+        </member>
+        <member name="M:T1YOS.Sdk.Utils.Validators.AssertObjectID(System.String,System.String)">
+            <summary>
+            Validates that a string is a valid 24-character hexadecimal ObjectID.
+            </summary>
+            <param name="idStr">The ObjectID string to validate.</param>
+            <param name="name">Optional name for the error message.</param>
+            <returns>True if the ObjectID is valid.</returns>
+            <exception cref="T:T1YOS.Sdk.Utils.ValidationError">Thrown if the string is not a valid ObjectID.</exception>
+        </member>
+    </members>
+</doc>

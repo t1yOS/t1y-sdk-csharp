@@ -1,0 +1,15 @@
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/bin/Debug/net8.0/T1YOS.Sdk.deps.json
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/bin/Debug/net8.0/T1YOS.Sdk.dll
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/bin/Debug/net8.0/T1YOS.Sdk.pdb
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/bin/Debug/net8.0/T1YOS.Sdk.xml
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.csproj.AssemblyReference.cache
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.AssemblyInfoInputs.cache
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.AssemblyInfo.cs
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.csproj.CoreCompileInputs.cache
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.sourcelink.json
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.dll
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/refint/T1YOS.Sdk.dll
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.xml
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/T1YOS.Sdk.pdb
+/Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/obj/Debug/net8.0/ref/T1YOS.Sdk.dll

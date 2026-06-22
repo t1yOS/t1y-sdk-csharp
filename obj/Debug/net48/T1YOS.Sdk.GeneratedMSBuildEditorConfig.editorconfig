@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = T1YOS.Sdk
+build_property.ProjectDir = /Users/wwwanghua/workSpace/t1y-os/t1y-os-sdks/T1YOS.Sdk/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
