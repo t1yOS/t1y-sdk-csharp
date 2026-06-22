@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("C# SDK for the t1yOS Serverless BaaS Platform — cloud database, metadata, and clo" +
     "ud functions client"))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+402476e7aa82104ac79f8c39a33e970cb54f96e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71774aeb3dafaf5e46f8b37cf5ccd8115dd70555")]
 [assembly: System.Reflection.AssemblyProductAttribute("T1YOS.Sdk")]
 [assembly: System.Reflection.AssemblyTitleAttribute("T1YOS.Sdk")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
