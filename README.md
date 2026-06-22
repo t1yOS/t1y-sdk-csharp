@@ -364,3 +364,5 @@ catch (ValidationError ex)
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 华易云联（杭州）网络科技有限责任公司

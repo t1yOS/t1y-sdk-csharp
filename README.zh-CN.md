@@ -364,3 +364,5 @@ catch (ValidationError ex)
 ## 开源协议
 
 本项目基于 [MIT License](LICENSE) 开源。
+
+Copyright (c) 2026 华易云联（杭州）网络科技有限责任公司
